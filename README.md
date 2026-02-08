@@ -14,3 +14,14 @@ Medical Logic (V8): Applied medical domain knowledge (e.g., Blood Pressure thres
 The Grand Finale (V9): Implemented multi-categorical interactions (Thallium + Vessels + Sex) to pinpoint high-risk patient profiles.
 Learning Approach
 Dedicated to "Sakyo" (the practice of hand-writing code) to master the underlying logic of data processing and model tuning. Each version represents a step toward becoming a more capable Data Scientist.
+
+
+## Visualizations
+
+### Feature Importance (Insights from V8/V9)
+Analyzing the impact of engineered features like `HR_Age_Index` and `MaxHR_per_Age`.
+![Feature Importance](image_a6a500.png)
+
+### Final Leaderboard Achievement
+Achieved a personal best of 0.95337 after 9 iterative improvements.
+![Final Score](image_a6a53b.png)
