@@ -25,3 +25,11 @@ Analyzing the impact of engineered features like `HR_Age_Index` and `MaxHR_per_A
 ### Final Leaderboard Achievement
 Achieved a personal best of 0.95337 after 9 iterative improvements.
 ![Final Score](image_a6a53b.png)
+
+Day 2 Update: Surpassing the 0.95 Wall
+
+Recovery from 0.5 baseline: Fixed pipeline pathing and prediction logic.
+
+Domain Integration: Introduced RPP (Rate Pressure Product) and Age-BP interaction features.
+
+Robustness: Implemented 5-Seed Averaging for leaderboard stability.
