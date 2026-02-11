@@ -26,10 +26,10 @@ Analyzing the impact of engineered features like `HR_Age_Index` and `MaxHR_per_A
 Achieved a personal best of 0.95337 after 9 iterative improvements.
 ![Final Score](image_a6a53b.png)
 
-Day 2 Update: Surpassing the 0.95 Wall
-
-Recovery from 0.5 baseline: Fixed pipeline pathing and prediction logic.
-
-Domain Integration: Introduced RPP (Rate Pressure Product) and Age-BP interaction features.
-
-Robustness: Implemented 5-Seed Averaging for leaderboard stability.
+### Day 2 Update: Breaking the 0.95 Barrier (Iteration 10-14)
+- **Problem**: Encountered 0.5 score baseline due to pipeline logic errors.
+- **Solution**: Rebuilt a robust "Defensive Programming" pipeline ensuring no `KeyError` and data alignment.
+- **Domain Engineering**:
+  - Integrated **Rate Pressure Product (RPP)** to capture myocardial oxygen demand.
+  - Added **Age_BP_Risk** to weight hypertension risks in elderly profiles.
+- **Outcome**: Achieved a personal best of **0.95018** through 5-Seed Averaging and feature synergy.
