@@ -25,7 +25,8 @@ Dedicated to "Sakyo" (the practice of hand-writing code) to master the underlyin
 
 ### Feature Importance (Insights from V8/V9)
 Analyzing the impact of engineered features like `HR_Age_Index` and `MaxHR_per_Age`.
-![Feature Importance](image_a6a500.png)
+<img width="988" height="701" alt="image" src="https://github.com/user-attachments/assets/0e589853-9945-4909-9d13-05608b62383c" />
+
 
 ### Final Leaderboard Achievement
 Achieved a personal best of 0.95337 after 9 iterative improvements.
