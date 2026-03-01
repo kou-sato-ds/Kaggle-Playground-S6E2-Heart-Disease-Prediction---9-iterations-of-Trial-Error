@@ -29,7 +29,8 @@ Analyzing the impact of engineered features like `HR_Age_Index` and `MaxHR_per_A
 
 ### Final Leaderboard Achievement
 Achieved a personal best of 0.95337 after 9 iterative improvements.
-![Final Score](image_a6a53b.png)
+<img width="1477" height="195" alt="image" src="https://github.com/user-attachments/assets/5241c693-ab23-49fd-b23a-28d94b59cc0a" />
+
 
 ### Day 2 Update: Breaking the 0.95 Barrier (Iteration 10-14)
 - **Problem**: Encountered 0.5 score baseline due to pipeline logic errors.
