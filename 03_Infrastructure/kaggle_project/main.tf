@@ -16,14 +16,13 @@ module "kaggle_s3" {
   tags        = { Project = var.project_tag, Owner = "Sato" }
 }
 
-# 4. 学習用データ保管バケット（ライフサイクルルールを追加）
+# 4. 学習用データ保管バケット
 module "s3_training_data" {
   source      = "../../AWS_IaC_Terraform/modules/s3_bucket"
   bucket_name = "sato-ds-project-training-data-2026"
   environment = "dev"
   tags        = { Project = var.project_tag, Owner = "Sato" }
 
-  # DEの実務スキル：30日が経過したオブジェクトを自動削除（コスト最適化）
   lifecycle_rule = [
     {
       id      = "auto-delete-old-data"
@@ -33,6 +32,27 @@ module "s3_training_data" {
       }
     }
   ]
+}
+
+# DEの実務スキル：セキュリティ（パブリックアクセスを完全に遮断）
+
+
+resource "aws_s3_bucket_public_access_block" "kaggle_s3_block" {
+  bucket = module.kaggle_s3.s3_bucket_id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+resource "aws_s3_bucket_public_access_block" "training_data_block" {
+  bucket = module.s3_training_data.s3_bucket_id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 # 5. アウトプット
