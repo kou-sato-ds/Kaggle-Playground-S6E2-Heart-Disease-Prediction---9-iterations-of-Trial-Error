@@ -96,6 +96,12 @@ resource "aws_iam_role" "data_pipeline_role" {
   })
 }
 
+# DEの実務スキル：PolicyとRoleを紐付けて権限を有効化する
+resource "aws_iam_role_policy_attachment" "s3_access_attach" {
+  role       = aws_iam_role.data_pipeline_role.name
+  policy_arn = aws_iam_policy.s3_access_policy.arn
+}
+
 # 7. アウトプット
 output "main_bucket_id" {
   value = module.kaggle_s3.s3_bucket_id
