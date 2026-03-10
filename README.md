@@ -1,42 +1,49 @@
-Version,変更点,スコア (RMSE),考察
-v1,Baseline (LightGBM),15.4,まずは基本モデルで構築
-v3,Target Encoding追加,14.2,カテゴリ変数の処理で改善
-v9,Ensemble (XGB+LGB),13.1,アンサンブルが有効だった
+# Kaggle 心臓病予測（Playground Series S6E2）
+本プロジェクトは、心臓病予測コンペティションにおける「14段階の反復的な改善プロセス」を記録したものです。特徴量エンジニアリング、ドメイン知識の活用、およびモデルのアンサンブル手法の実装に焦点を当てています。
 
-# Kaggle-Playground-S6E2-Heart-Disease-Prediction---9-iterations-of-Trial-Error
-A comprehensive record of 9 iterative feature engineering stages for heart disease prediction in the Kaggle Playground Series (S6E2), featuring advanced categorical interactions and 5-seed ensemble techniques.
+## 📈 改善の履歴（Iteration History）
 
-Kaggle Heart Disease Prediction (Playground Series S6E2)
-This repository documents my journey of 9 iterative model improvements, focusing on practical implementation skills and feature hypothesis testing.
+| バージョン | 主な変更点 | スコア (AUC) | 考察・気づき |
+| :--- | :--- | :--- | :--- |
+| **v1** | ベースライン (LightGBM) | 0.932 | 基本モデルの構築。まずは基準値を確立。 |
+| **v3** | Target Encodingの導入 | 0.941 | カテゴリ変数の適切な処理により精度が向上。 |
+| **v9** | アンサンブル (XGB+LGB) | 0.953 | 複数モデルの組み合わせと統計的特徴量が極めて有効。 |
+| **v14** | 医療指標 (RPP等) の追加 | **0.950** | 専門知識（血圧と心拍数の相関）の注入により精度が安定。 |
 
-Key Outcomes
-Best Public Score: 0.95337
-Methodology: 5-Seed Averaging, Stratified 5-Fold CV, and Advanced Feature Engineering.
-Evolutionary Journey (V1 - V9)
-Foundation (V1-V5): Established a robust cross-validation framework using LightGBM.
-Statistical Insights (V6-V7): Engineered features like BP_diff_Mean to detect anomalies relative to global averages.
-Medical Logic (V8): Applied medical domain knowledge (e.g., Blood Pressure thresholds > 140) and data normalization via Log Transformations.
-The Grand Finale (V9): Implemented multi-categorical interactions (Thallium + Vessels + Sex) to pinpoint high-risk patient profiles.
-Learning Approach
-Dedicated to "Sakyo" (the practice of hand-writing code) to master the underlying logic of data processing and model tuning. Each version represents a step toward becoming a more capable Data Scientist.
+## 🚀 プロジェクトの概要
+データサイエンスの実務で求められる「写経（ロジックの深い理解）」と「仮説検証」を繰り返し、14回にわたるモデル改善を実施しました。
 
+### 主な実績
+- **自己ベストスコア**: 0.95337
+- **検証手法**: 5-Seed Averaging（シード平均化）、層化5分割交差検証（Stratified 5-Fold CV）
+- **特徴量設計**: 高度な交互作用特徴量、ドメイン知識に基づく医療指標の生成
 
-## Visualizations
+### 試行錯誤のプロセス
+- **基礎フェーズ (V1-V5)**: 堅牢なバリデーション設計と基本モデルの最適化。
+- **統計フェーズ (V6-V7)**: 全体平均からの乖離度を捉える異常検知系特徴量の設計。
+- **ドメインフェーズ (V8-V14)**: 血圧の閾値判定や、心筋酸素消費量（RPP）指標の導入。
+- **堅牢化**: パイプラインを再設計し、エラー耐性の高い「防御的プログラミング」を実践。
 
-### Feature Importance (Insights from V8/V9)
-Analyzing the impact of engineered features like `HR_Age_Index` and `MaxHR_per_Age`.
+## 📊 可視化と分析
+
+### 特徴量重要度 (Feature Importance)
+独自設計した `HR_Age_Index` 等が予測に大きく寄与していることを確認。
 <img width="988" height="701" alt="image" src="https://github.com/user-attachments/assets/0e589853-9945-4909-9d13-05608b62383c" />
 
-
-### Final Leaderboard Achievement
-Achieved a personal best of 0.95337 after 9 iterative improvements.
+### リーダーボード実績
+反復的な改善により、着実に上位スコアへと到達。
 <img width="1477" height="195" alt="image" src="https://github.com/user-attachments/assets/5241c693-ab23-49fd-b23a-28d94b59cc0a" />
 
+---
 
-### Day 2 Update: Breaking the 0.95 Barrier (Iteration 10-14)
-- **Problem**: Encountered 0.5 score baseline due to pipeline logic errors.
-- **Solution**: Rebuilt a robust "Defensive Programming" pipeline ensuring no `KeyError` and data alignment.
-- **Domain Engineering**:
-  - Integrated **Rate Pressure Product (RPP)** to capture myocardial oxygen demand.
-  - Added **Age_BP_Risk** to weight hypertension risks in elderly profiles.
-- **Outcome**: Achieved a personal best of **0.95018** through 5-Seed Averaging and feature synergy.
+## 🛠 AWS インフラ構成 (IaC)
+データの安全性と再現性を確保するため、AWSインフラを Terraform で構築しています。
+
+```text
+[インターネット] -> [EC2 インスタンス (データパイプライン)]
+                         |
+                         | (IAM ロール: DataPipelineRole)
+                         v
+                [S3 バケット]
+                  - 心臓病学習データ (開発用バケット)
+                  - トレーニングデータ保管用バケット (2026)
