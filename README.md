@@ -1,49 +1,17 @@
-# Kaggle 心臓病予測（Playground Series S6E2）
-本プロジェクトは、心臓病予測コンペティションにおける「14段階の反復的な改善プロセス」を記録したものです。特徴量エンジニアリング、ドメイン知識の活用、およびモデルのアンサンブル手法の実装に焦点を当てています。
+![Python CI](https://github.com/kou-sato-ds/Kaggle-Playground-S6E2-Heart-Disease-Prediction---9-iterations-of-Trial-Error/actions/workflows/python-ci.yml/badge.svg)
 
-## 📈 改善の履歴（Iteration History）
+# 🫀 Kaggle Heart Disease Prediction: 9 Iterations of Trial & Error
 
-| バージョン | 主な変更点 | スコア (AUC) | 考察・気づき |
-| :--- | :--- | :--- | :--- |
-| **v1** | ベースライン (LightGBM) | 0.932 | 基本モデルの構築。まずは基準値を確立。 |
-| **v3** | Target Encodingの導入 | 0.941 | カテゴリ変数の適切な処理により精度が向上。 |
-| **v9** | アンサンブル (XGB+LGB) | 0.953 | 複数モデルの組み合わせと統計的特徴量が極めて有効。 |
-| **v14** | 医療指標 (RPP等) の追加 | **0.950** | 専門知識（血圧と心拍数の相関）の注入により精度が安定。 |
-
-## 🚀 プロジェクトの概要
-データサイエンスの実務で求められる「写経（ロジックの深い理解）」と「仮説検証」を繰り返し、14回にわたるモデル改善を実施しました。
-
-### 主な実績
-- **自己ベストスコア**: 0.95337
-- **検証手法**: 5-Seed Averaging（シード平均化）、層化5分割交差検証（Stratified 5-Fold CV）
-- **特徴量設計**: 高度な交互作用特徴量、ドメイン知識に基づく医療指標の生成
-
-### 試行錯誤のプロセス
-- **基礎フェーズ (V1-V5)**: 堅牢なバリデーション設計と基本モデルの最適化。
-- **統計フェーズ (V6-V7)**: 全体平均からの乖離度を捉える異常検知系特徴量の設計。
-- **ドメインフェーズ (V8-V14)**: 血圧の閾値判定や、心筋酸素消費量（RPP）指標の導入。
-- **堅牢化**: パイプラインを再設計し、エラー耐性の高い「防御的プログラミング」を実践。
-
-## 📊 可視化と分析
-
-### 特徴量重要度 (Feature Importance)
-独自設計した `HR_Age_Index` 等が予測に大きく寄与していることを確認。
-<img width="988" height="701" alt="image" src="https://github.com/user-attachments/assets/0e589853-9945-4909-9d13-05608b62383c" />
-
-### リーダーボード実績
-反復的な改善により、着実に上位スコアへと到達。
-<img width="1477" height="195" alt="image" src="https://github.com/user-attachments/assets/5241c693-ab23-49fd-b23a-28d94b59cc0a" />
+Kaggle Playground Series (S6E2) における心臓病予測プロジェクト。
+単一のモデル構築に留まらず、**9段階にわたる特徴量エンジニアリングとアンサンブル手法の深化**を記録した、実践的なモデル開発のポートフォリオです。
 
 ---
 
-## 🛠 AWS インフラ構成 (IaC)
-データの安全性と再現性を確保するため、AWSインフラを Terraform で構築しています。
+## 📈 モデル進化のロードマップ (Development Roadmap)
 
-```text
-[インターネット] -> [EC2 インスタンス (データパイプライン)]
-                         |
-                         | (IAM ロール: DataPipelineRole)
-                         v
-                [S3 バケット]
-                  - 心臓病学習データ (開発用バケット)
-                  - トレーニングデータ保管用バケット (2026)
+```mermaid
+graph TD
+    v1[<b>v1-v3: Baseline</b><br/>LightGBM / Simple Encoding] --> v5[<b>v5-v7: Interaction</b><br/>Category Interax / Target Encoding]
+    v5 --> v9[<b>v9: Final Master</b><br/>XGB+LGBM Ensemble / 5-Seed Averaging]
+
+    style v9 fill:#f1c40f,stroke:#333,color:#333
